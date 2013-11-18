@@ -36,6 +36,21 @@ You'll need to edit one file in this folder: `meta.json`. This is the file that 
 
 Replace those capitalised words with the title and description of your publication. You can change them again later if needs be. Be sure to keep the "quote" marks and commas in place. Save the file.
 
+### Announcements #################################################################
+
+Sometimes you may want to tell your users about a change to the service, or a new feature. You can do this by editing the `announcements.json` file at base directory of your publication.
+
+Each announcement must have a date, title, and body text. Here is the sample announcement, included by default in the announcements JSON file:
+
+    {
+    	"date": "1975-11-18",
+    	"title": "Hello World!",
+    	"body": "Here's a sample announcememnt. It tells the users about a new feature, or a change in content. This one will never be broadcast, unless your server lives in the 1970s."
+    }
+
+The date should be of the format `YYYY-MM-DD` (ISO 8601). Announcements are printed only on the day included in the date field. If you want to re-run announcements, you'll have to either add a new one, or change the date on an existing one.
+
+The announcement is printed above the main content of your publication, in a `<div>` with the class of `.announcement`, for easy styling. You can change the HTML of the announcements in the `includes/announcement.php` template.
 
 ### Upload the files ##############################################################
 
