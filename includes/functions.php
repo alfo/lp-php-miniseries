@@ -38,6 +38,36 @@ function lp_page_footer() {
 </html><?php
 }
 
+/**
+ * Output any announcements for today, read from announcements.json
+ */
+
+function lp_page_announcement() {
+	
+	// Load the announcements from the JSON file
+	$announcements = json_decode(file_get_contents(lp_directory_path().'announcements.json'), true);
+
+	// Today's announcement (blank to begin with)
+	$today_announcement = '';
+
+	// Get today's date for reference
+	$today = date('Ymd');
+
+	// Loop through all the announcements in the JSON file
+	foreach ($announcements as $announcement) {
+		
+		// If the announcement's date is today's date
+		if (date('Ymd', strtotime($announcement['date'])) == $today) {
+			
+			// Set today's announcement to be the current one in the loop
+			$today_announcement = $announcement;
+		}
+	}
+
+	if ($today_announcement) {
+		require lp_directory_path().'includes/announcement.php';
+	}
+}
 
 /**
  * Generates the HTML for the whole page, for both /edition/ and /sample/.
@@ -154,6 +184,8 @@ function lp_display_page() {
 		// We have content to display!
 
 		lp_page_header();
+
+		lp_page_announcement();
 
 		require lp_directory_path().'includes/header.php';	
 
